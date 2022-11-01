@@ -129,7 +129,11 @@ audioSource = GetComponent<AudioSource>();
 audioSource.Play();
 ```
 
-![video](https://github.com/S1GARETA/UnityLab4/blob/main/Demo%20files/1.5.mkv)
+
+
+https://user-images.githubusercontent.com/96253861/199208388-fe3e945c-1847-46d9-a099-c2ce36af13d4.mp4
+
+
 
 #### 5. Добавление персонажа и сборка сцены для публикации на web-ресурсе.
 
