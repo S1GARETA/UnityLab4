@@ -129,11 +129,7 @@ audioSource = GetComponent<AudioSource>();
 audioSource.Play();
 ```
 
-
-
 https://user-images.githubusercontent.com/96253861/199208388-fe3e945c-1847-46d9-a099-c2ce36af13d4.mp4
-
-
 
 #### 5. Добавление персонажа и сборка сцены для публикации на web-ресурсе.
 
@@ -143,13 +139,90 @@ https://user-images.githubusercontent.com/96253861/199208388-fe3e945c-1847-46d9-
 ![gif](https://github.com/S1GARETA/UnityLab4/blob/main/Demo%20files/1.6.gif)
 
 ## Задание 2
-#### Привести описание того, как происходит сборка проекта проекта под другие платформы. Какие могут быть особенности?
+#### Привести описание того, как происходит сборка проекта под другие платформы. Какие могут быть особенности?
 
 ### Ход работы:
+
+Чтобы создать сборку проекта под другую платформу, нужно зайти в Build Settings и выбрать интересующую нас платформу.
+
+Из особенностей можно выделить "Платформенно зависимую компиляцию". Она позволяет разделить скрипты для компиляции и выполнения части кода исключительно для одной из поддерживаемых платформ. Для этого нужно написать скрипт, который будет определять платформу.
+
+```cs
+using UnityEngine;
+using System.Collections;
+
+public class PlatformDefines : MonoBehaviour {
+  void Start () {
+
+    #if UNITY_EDITOR
+      Debug.Log("Unity Editor");
+    #endif
+    
+    #if UNITY_IOS
+      Debug.Log("Iphone");
+    #endif
+
+    #if UNITY_STANDALONE_OSX
+    Debug.Log("Stand Alone OSX");
+    #endif
+
+    #if UNITY_STANDALONE_WIN
+      Debug.Log("Stand Alone Windows");
+    #endif
+
+  }          
+}
+```
+
+Также, можно выделить то, что при выполнении сборки для консолей PlayStation, Xbox и Nintendo, нужно быть зарегистрированным разработчиком консолей.
 
 ## Задание 3
 #### Добавить в меню Option возможность изменения громкости (от 0 до 100%) фоновой музыки в игре.
 
 ### Ход работы:
+
+1. Добавить в меню настроек UI объект - слайдер.
+2. Написать новый скрипт AudioController, с помощью которого будет изменяться громкость звуков в игре, а так же запоминаться значение громкости.
+
+```cs
+using UnityEngine;
+using UnityEngine.UI;
+
+public class AudioController : MonoBehaviour
+{
+    [SerializeField] private Slider volumeSlider;
+
+    void Start() 
+    {
+        if(!PlayerPrefs.HasKey("soundVolume"))
+        {
+            PlayerPrefs.SetFloat("soundVolume", 1);
+            Load();
+        }
+        else
+        {
+            Load();
+        }
+    }
+    public void ChangeVolume()
+    {
+        AudioListener.volume = volumeSlider.value;
+        Save();
+    }
+    private void Load()
+    {
+        volumeSlider.value = PlayerPrefs.GetFloat("soundVolume");
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("soundVolume", volumeSlider.value);
+    }
+}
+```
+
+видео
+
+
 
 ## Выводы
