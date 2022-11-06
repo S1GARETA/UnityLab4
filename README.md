@@ -221,8 +221,6 @@ public class AudioController : MonoBehaviour
 }
 ```
 
-видео
-
-
+https://user-images.githubusercontent.com/96253861/200170036-ea0f8f24-70d4-4f79-81d1-fe8d1dc823db.mp4
 
 ## Выводы
